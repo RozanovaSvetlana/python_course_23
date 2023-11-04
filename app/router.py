@@ -1,7 +1,7 @@
 from fastapi import APIRouter, status, HTTPException
 
-from hw_1.tree_service import TreeService
-from hw_1.node_entity import NodeEntity
+from app.tree_service import TreeService
+from app.node_entity import NodeEntity
 
 routers = APIRouter()
 service = TreeService()
@@ -48,7 +48,7 @@ async def print_node(node: NodeEntity):
     return {node.parent_id}
 
 
-@routers.post("/create/")
+@routers.post("/create")
 async def create_node(node: NodeEntity):
     """
     Add new node to tree
@@ -63,15 +63,15 @@ async def create_node(node: NodeEntity):
     return {"status": code, "message": message}
 
 
-@routers.get("/get_count/")
+@routers.get("/get_count")
 async def get_count():
     """
     Get count node from tree
     """
-    return {"status": status.HTTP_200_OK, "count node": service.get_count()}
+    return {"status": status.HTTP_200_OK, "count_node": service.get_count()}
 
 
-@routers.get("/print/")
+@routers.get("/print")
 async def print_tree():
     """
     Print tree inorder

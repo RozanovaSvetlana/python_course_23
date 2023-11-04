@@ -1,5 +1,5 @@
-from hw_1.logic.tree import Tree
-from hw_1.node_entity import NodeEntity
+from app.logic.tree import Tree
+from app.node_entity import NodeEntity
 
 
 class TreeService:

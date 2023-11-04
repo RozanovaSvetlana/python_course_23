@@ -1,4 +1,4 @@
-from hw_1.logic.node import Node
+from app.logic.node import Node
 
 
 class Tree:
