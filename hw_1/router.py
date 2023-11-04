@@ -65,16 +65,26 @@ async def create_node(node: NodeEntity):
 
 @routers.get("/get_count/")
 async def get_count():
+    """
+    Get count node from tree
+    """
     return {"status": status.HTTP_200_OK, "count node": service.get_count()}
 
 
 @routers.get("/print/")
 async def print_tree():
+    """
+    Print tree inorder
+    """
     return {"status": status.HTTP_200_OK, "tree": service.get_inorder()}
 
 
 @routers.get("/find")
 async def contains(key: int):
+    """
+    Check is key contains
+    :param key: key for check
+    """
     return {"status": status.HTTP_200_OK, "contains": service.contains(key)}
 
 

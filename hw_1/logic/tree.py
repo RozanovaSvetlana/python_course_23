@@ -2,14 +2,27 @@ from hw_1.logic.node import Node
 
 
 class Tree:
+    """
+    BST with unique keys
+    """
+
     def __init__(self):
         self.__root = None
         self.__count = 0
 
     def print(self):
+        """
+        Print all tree
+        :return: String for print
+        """
         return self.__dfs(self.__root).strip()
 
     def add(self, key: int):
+        """
+        Add new node in tree
+        :param key: key for add
+        :exception: if node already exist
+        """
         try:
             self.__root = self.__insert_new_node(self.__root, Node(key))
             self.__count += 1
@@ -17,6 +30,11 @@ class Tree:
             raise ex
 
     def __insert_new_node(self, root: Node, node: Node):
+        """
+        Insert new node in tree
+        :param root: node
+        :param node: new node
+        """
         if root is None:
             return node
         if root.key == node.key:
@@ -28,6 +46,11 @@ class Tree:
         return root
 
     def __dfs(self, node: Node):
+        """
+        Do inorder for print
+        :param node: node
+        :return: String for print
+        """
         if node:
             answer = self.__dfs(node.left)
             answer += str(node.key) + " "
@@ -36,12 +59,27 @@ class Tree:
         return ""
 
     def get_count(self):
+        """
+        Get count node in tree
+        :return: count node
+        """
         return self.__count
 
     def contains(self, key: int):
+        """
+        Check is key contains in tree
+        :param key: key for check
+        :return: True if key in tree, False -- otherwise
+        """
         return self.__find_node(self.__root, key)
 
     def __find_node(self, root: Node, key: int):
+        """
+        Find node in tree
+        :param root: node
+        :param key: key for found
+        :return: True if node in tree, False -- otherwise
+        """
         if root:
             if root.key == key:
                 return True
