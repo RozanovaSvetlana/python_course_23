@@ -1,7 +1,10 @@
-from fastapi import APIRouter
-from hw_1.node import Node
+from fastapi import APIRouter, status, HTTPException
+
+from hw_1.logic.tree_service import TreeService
+from hw_1.node_entity import NodeEntity
 
 routers = APIRouter()
+service = TreeService()
 
 
 @routers.get("/")
@@ -35,7 +38,7 @@ async def get_user_info(id: int, query: str):
 
 
 @routers.post("/node/")
-async def print_node(node: Node):
+async def print_node(node: NodeEntity):
     """
     Print node and return node.parent_id
     :param node: Node
@@ -43,3 +46,28 @@ async def print_node(node: Node):
     """
     print(node)
     return {node.parent_id}
+
+
+@routers.post("/create/")
+async def create_node(node: NodeEntity):
+    """
+    Add new node to tree
+    :param node: node entity fo add
+    :return:
+    """
+    res, message = service.add_node(node)
+    if res:
+        code = status.HTTP_200_OK
+    else:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=message)
+    return {"status": code, "message": message}
+
+
+@routers.get("/get_count/")
+async def get_count():
+    return {"status": status.HTTP_200_OK, "count node": service.get_count()}
+
+
+@routers.get("/print/")
+async def print_tree():
+    return {"status": status.HTTP_200_OK, "tree": service.get_inorder()}
