@@ -37,3 +37,16 @@ class Tree:
 
     def get_count(self):
         return self.__count
+
+    def contains(self, key: int):
+        return self.__find_node(self.__root, key)
+
+    def __find_node(self, root: Node, key: int):
+        if root:
+            if root.key == key:
+                return True
+            elif root.key < key:
+                return self.__find_node(root.right, key)
+            else:
+                return self.__find_node(root.left, key)
+        return False

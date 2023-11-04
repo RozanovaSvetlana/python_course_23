@@ -18,3 +18,6 @@ class TreeService:
 
     def get_inorder(self):
         return self.__tree.print()
+
+    def contains(self, key: int):
+        return self.__tree.contains(key)

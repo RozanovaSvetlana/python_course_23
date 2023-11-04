@@ -1,6 +1,6 @@
 from fastapi import APIRouter, status, HTTPException
 
-from hw_1.logic.tree_service import TreeService
+from hw_1.tree_service import TreeService
 from hw_1.node_entity import NodeEntity
 
 routers = APIRouter()
@@ -71,3 +71,8 @@ async def get_count():
 @routers.get("/print/")
 async def print_tree():
     return {"status": status.HTTP_200_OK, "tree": service.get_inorder()}
+
+
+@routers.get("/find")
+async def contains(key: int):
+    return {"status": status.HTTP_200_OK, "contains": service.contains(key)}
