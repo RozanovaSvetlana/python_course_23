@@ -76,3 +76,17 @@ async def print_tree():
 @routers.get("/find")
 async def contains(key: int):
     return {"status": status.HTTP_200_OK, "contains": service.contains(key)}
+
+
+@routers.get("/delete")
+async def delete_node(key: int):
+    """
+    Delete node
+    :param key: key for delete
+    """
+    res, message = service.delete(key)
+    if res:
+        code = status.HTTP_200_OK
+    else:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=message)
+    return {"status": code, "message": message}

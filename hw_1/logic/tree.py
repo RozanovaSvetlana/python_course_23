@@ -50,3 +50,50 @@ class Tree:
             else:
                 return self.__find_node(root.left, key)
         return False
+
+    def delete_node(self, key: int):
+        """
+        Delete node from tree
+        :param key: key for delete
+        """
+        if self.__root is None:
+            raise Exception("Tree is empty")
+        self.__root = self.__delete(self.__root, key)
+        return True
+
+    def __delete(self, root: Node, key: int):
+        """
+        Search and delete node
+        :param root: node
+        :param key: key for delete
+        :return: node
+        """
+        if root is None:
+            raise Exception("Node not found!")
+        if root.key > key:
+            root.left = self.__delete(root.left, key)
+            return root
+        elif root.key < key:
+            root.right = self.__delete(root.right, key)
+            return root
+        if root.left is None:
+            temp = root.right
+            del root
+            return temp
+        elif root.right is None:
+            temp = root.left
+            del root
+            return temp
+        else:
+            succ_parent = root
+            succ = root.right
+            while succ.left is not None:
+                succ_parent = succ
+                succ = succ.left
+            if succ_parent != root:
+                succ_parent.left = succ.right
+            else:
+                succ_parent.right = succ.right
+            root.key = succ.key
+            del succ
+            return root

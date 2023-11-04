@@ -21,3 +21,15 @@ class TreeService:
 
     def contains(self, key: int):
         return self.__tree.contains(key)
+
+    def delete(self, key: int):
+        """
+        Delete node from tree
+        :param key: key for delete
+        :return: True if delete successfully, False -- otherwise
+        """
+        try:
+            self.__tree.delete_node(key)
+            return True, "Node has been successfully delete!"
+        except Exception as ex:
+            return False, ex.args[0]
