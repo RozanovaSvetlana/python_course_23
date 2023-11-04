@@ -96,7 +96,11 @@ class Tree:
         """
         if self.__root is None:
             raise Exception("Tree is empty")
-        self.__root = self.__delete(self.__root, key)
+        try:
+            self.__root = self.__delete(self.__root, key)
+            self.__count -= 1
+        except Exception as ex:
+            raise ex
         return True
 
     def __delete(self, root: Node, key: int):
