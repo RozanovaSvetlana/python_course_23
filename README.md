@@ -29,3 +29,16 @@ python3 -m pytest tests/{filename}
 + integration.py
 + integration_print.py
 + unit.py
+
+## Homework 4
+
+Реализовать простую логику с использованием celery и rabbit.
+
+В качестве задач:
+
++ Получить строку "Hello world!"
++ Умножить два числа
++ Сложить два числа
++ Вывести и получить текущую дату
+
+Запускается командой ``celery -A hw_4.app worker -l INFO``
